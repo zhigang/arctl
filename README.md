@@ -2,6 +2,9 @@
 
 Controller for aliyun retail cloud.
 
+[![test](https://github.com/zhigang/arctl/actions/workflows/test.yml/badge.svg)](https://github.com/zhigang/arctl/actions)
+[![codecov](https://codecov.io/gh/zhigang/arctl/branch/master/graph/badge.svg?token=I35IBQTJCW)](https://codecov.io/gh/zhigang/arctl)
+
 ## Howto
 
 ### Quick Start
