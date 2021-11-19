@@ -16,11 +16,13 @@ type factoryImpl struct {
 	loader  sync.Once
 }
 
+// NewFactory returns a fake impl factory
 func NewFactory() util.Factory {
 	fct = &factoryImpl{}
 	return fct
 }
 
+// LoadConfig loads a config file
 func LoadConfig(cfgFile string) {
 	fct.cfgFile = cfgFile
 	fct.Config()

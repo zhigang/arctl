@@ -9,7 +9,7 @@ import (
 	"github.com/zhigang/arctl/util"
 )
 
-func getTestOptions() (*bytes.Buffer, util.Factory, *GetOptions) {
+func getTestOptions() (*bytes.Buffer, util.Factory, *getOptions) {
 	streams, _, buf, _ := my_testing.NewTestIOStreams()
 	tf := my_testing.NewFactory()
 	o := newGetOptions(streams)
@@ -64,7 +64,7 @@ func TestGetNodes(t *testing.T) {
 	cmd.SetOutput(buf)
 	cmd.Flags().Set("type", "0")
 	cmd.Flags().StringVarP(&o.ID, "id", "i", o.ID, "ID of resource.")
-	cmd.Flags().Set("id", my_testing.CLUSTER1_ID)
+	cmd.Flags().Set("id", my_testing.Cluster1ID)
 	cmd.Run(cmd, []string{"test1"})
 
 	if !(strings.Contains(buf.String(), "Test集群") &&

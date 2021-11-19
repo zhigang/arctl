@@ -11,7 +11,7 @@ import (
 )
 
 // newCmdGetPods creates a command object for get pods from a specific application.
-func newCmdGetPods(o *GetOptions, f util.Factory) *cobra.Command {
+func newCmdGetPods(o *getOptions, f util.Factory) *cobra.Command {
 
 	var cmd = &cobra.Command{
 		Use:                   "pods [APPLICATION_NAME]",

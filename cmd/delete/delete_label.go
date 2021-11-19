@@ -9,7 +9,7 @@ import (
 )
 
 // newCmdDeleteLabel is a command to delete labels from a cluster.
-func newCmdDeleteLabel(o *DeleteOptions, f util.Factory) *cobra.Command {
+func newCmdDeleteLabel(o *deleteOptions, f util.Factory) *cobra.Command {
 
 	var cmd = &cobra.Command{
 		Use:   "label",

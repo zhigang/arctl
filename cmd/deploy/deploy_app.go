@@ -11,8 +11,8 @@ import (
 	"github.com/zhigang/arctl/util"
 )
 
-// DeployOptions is returned by newDeployOptions
-type DeployOptions struct {
+// deployOptions is returned by newDeployOptions
+type deployOptions struct {
 	Name            string
 	AppID           string
 	AppName         string
@@ -26,9 +26,9 @@ type DeployOptions struct {
 	printers.IOStreams
 }
 
-// newDeployOptions returns an initialized DeployOptions instance
-func newDeployOptions(streams printers.IOStreams) *DeployOptions {
-	return &DeployOptions{
+// newDeployOptions returns an initialized deployOptions instance
+func newDeployOptions(streams printers.IOStreams) *deployOptions {
+	return &deployOptions{
 		IOStreams:       streams,
 		Type:            0,
 		TotalPartitions: 2,

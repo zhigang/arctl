@@ -12,7 +12,7 @@ import (
 )
 
 // newCmdDescribeAppConfig show details of a specific application's deploy config.
-func newCmdDescribeAppConfig(o *DescribeOptions, f util.Factory) *cobra.Command {
+func newCmdDescribeAppConfig(o *describeOptions, f util.Factory) *cobra.Command {
 
 	var cmd = &cobra.Command{
 		Use:   "config [APPLICATION_NAME]",

@@ -19,7 +19,7 @@ func newEnvironmentService(factory util.Factory) *environmentServiceImpl {
 
 func (s *environmentServiceImpl) GetEnvList(appID, pageNumber, pageSize, envType int, envName string) (*retailcloud.ListAppEnvironmentResponse, error) {
 	request := retailcloud.CreateListAppEnvironmentRequest()
-	request.Scheme = util.REQUEST_SCHEME
+	request.Scheme = util.RequestScheme
 
 	request.AppId = requests.NewInteger(appID)
 	request.PageNumber = requests.NewInteger(pageNumber)
@@ -44,7 +44,7 @@ func (s *environmentServiceImpl) GetEnvList(appID, pageNumber, pageSize, envType
 
 func (s *environmentServiceImpl) GetEnvDetail(appID, envID int) (*retailcloud.DescribeAppEnvironmentDetailResponse, error) {
 	request := retailcloud.CreateDescribeAppEnvironmentDetailRequest()
-	request.Scheme = util.REQUEST_SCHEME
+	request.Scheme = util.RequestScheme
 
 	request.AppId = requests.NewInteger(appID)
 	request.EnvId = requests.NewInteger(envID)
@@ -59,9 +59,9 @@ func (s *environmentServiceImpl) GetEnvDetail(appID, envID int) (*retailcloud.De
 	return response, nil
 }
 
-func (s *environmentServiceImpl) CreateEnv(appID, schemaID, replicas, envType int, envName, region, clusterId string) (*retailcloud.CreateEnvironmentResponse, error) {
+func (s *environmentServiceImpl) CreateEnv(appID, schemaID, replicas, envType int, envName, region, clusterID string) (*retailcloud.CreateEnvironmentResponse, error) {
 	request := retailcloud.CreateCreateEnvironmentRequest()
-	request.Scheme = util.REQUEST_SCHEME
+	request.Scheme = util.RequestScheme
 
 	request.AppId = requests.NewInteger(appID)
 	request.AppSchemaId = requests.NewInteger(schemaID)
@@ -69,7 +69,7 @@ func (s *environmentServiceImpl) CreateEnv(appID, schemaID, replicas, envType in
 	request.EnvType = requests.NewInteger(envType)
 	request.Replicas = requests.NewInteger(replicas)
 	request.Region = region
-	request.ClusterId = clusterId
+	request.ClusterId = clusterID
 
 	client, err := s.factory.RetailCloudClient()
 	if err != nil {
@@ -84,7 +84,7 @@ func (s *environmentServiceImpl) CreateEnv(appID, schemaID, replicas, envType in
 
 func (s *environmentServiceImpl) DeleteEnv(appID, envID int, force bool) (*retailcloud.DeleteAppEnvironmentResponse, error) {
 	request := retailcloud.CreateDeleteAppEnvironmentRequest()
-	request.Scheme = util.REQUEST_SCHEME
+	request.Scheme = util.RequestScheme
 
 	request.AppId = requests.NewInteger(appID)
 	request.EnvId = requests.NewInteger(envID)

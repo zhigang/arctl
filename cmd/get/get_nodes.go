@@ -12,7 +12,7 @@ import (
 )
 
 // newCmdGetNodes creates a command object for get nodes from a cluster.
-func newCmdGetNodes(o *GetOptions, f util.Factory) *cobra.Command {
+func newCmdGetNodes(o *getOptions, f util.Factory) *cobra.Command {
 
 	var cmd = &cobra.Command{
 		Use:   "nodes",
@@ -101,7 +101,7 @@ func newCmdGetNodes(o *GetOptions, f util.Factory) *cobra.Command {
 					w := &pool.Worker{
 						Process: func(param ...interface{}) interface{} {
 							node := param[0].(retailcloud.ClusterNodeInfo)
-							opt := param[1].(*GetOptions)
+							opt := param[1].(*getOptions)
 							fct := param[2].(util.Factory)
 							matched, labels, err := getNodeLabels(node, opt, fct)
 							if err != nil {
@@ -155,7 +155,7 @@ func convertMBToGB(mem string) string {
 	return strconv.Itoa(mb/1024) + "GB"
 }
 
-func getNodeLabels(v retailcloud.ClusterNodeInfo, o *GetOptions, f util.Factory) (bool, string, error) {
+func getNodeLabels(v retailcloud.ClusterNodeInfo, o *getOptions, f util.Factory) (bool, string, error) {
 	ns := f.NodeService()
 	matchLabels := false
 	if o.LabelSelector == "" {

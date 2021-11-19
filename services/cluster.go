@@ -19,7 +19,7 @@ func newClusterService(factory util.Factory) *clusterServiceImpl {
 
 func (s *clusterServiceImpl) GetClusterList(envType string, pageNumber, pageSize int) (*retailcloud.ListClusterResponse, error) {
 	request := retailcloud.CreateListClusterRequest()
-	request.Scheme = util.REQUEST_SCHEME
+	request.Scheme = util.RequestScheme
 	if envType != "" {
 		request.EnvType = envType
 	}
@@ -39,7 +39,7 @@ func (s *clusterServiceImpl) GetClusterList(envType string, pageNumber, pageSize
 
 func (s *clusterServiceImpl) GetCluster(id string) (*retailcloud.QueryClusterDetailResponse, error) {
 	request := retailcloud.CreateQueryClusterDetailRequest()
-	request.Scheme = util.REQUEST_SCHEME
+	request.Scheme = util.RequestScheme
 	request.ClusterInstanceId = id
 
 	client, err := s.factory.RetailCloudClient()

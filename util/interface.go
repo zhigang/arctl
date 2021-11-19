@@ -4,6 +4,7 @@ import (
 	"github.com/aliyun/alibaba-cloud-sdk-go/services/retailcloud"
 )
 
+// AppService is a application service of retail client
 type AppService interface {
 	GetApp(appID int) (*retailcloud.DescribeAppDetailResponse, error)
 	DeleteApp(appID int, force bool) (*retailcloud.DeleteAppDetailResponse, error)
@@ -25,18 +26,21 @@ type AppService interface {
 	GetDeployConfig(appID, id int, name, envType string) (*retailcloud.ListDeployConfigResponse, error)
 }
 
+// ClusterService is a cluster service of retail client
 type ClusterService interface {
 	GetClusterList(envType string, pageNumber, pageSize int) (*retailcloud.ListClusterResponse, error)
 	GetCluster(id string) (*retailcloud.QueryClusterDetailResponse, error)
 }
 
+// EnvironmentService is a environment service of retail client
 type EnvironmentService interface {
 	GetEnvList(appID, pageNumber, pageSize, envType int, envName string) (*retailcloud.ListAppEnvironmentResponse, error)
 	GetEnvDetail(appID, envID int) (*retailcloud.DescribeAppEnvironmentDetailResponse, error)
-	CreateEnv(appID, schemaID, replicas, envType int, envName, region, clusterId string) (*retailcloud.CreateEnvironmentResponse, error)
+	CreateEnv(appID, schemaID, replicas, envType int, envName, region, clusterID string) (*retailcloud.CreateEnvironmentResponse, error)
 	DeleteEnv(appID, envID int, force bool) (*retailcloud.DeleteAppEnvironmentResponse, error)
 }
 
+// NodeService is a node service of retail client
 type NodeService interface {
 	GetClusterNodes(clusterID string, pageNumber, pageSize int) (*retailcloud.ListClusterNodeResponse, error)
 	GetNodeLabels(clusterID, instanceID, labelKey, labelValue string, pageNumber, pageSize int) (*retailcloud.ListNodeLabelBindingsResponse, error)
@@ -45,6 +49,7 @@ type NodeService interface {
 	DeleteNodeLabel(clusterID, labelKey, labelValue string, force bool) (*retailcloud.DeleteNodeLabelResponse, error)
 }
 
+// UserService is a user service of retail client
 type UserService interface {
 	GetUserList(pageNumber, pageSize int) (*retailcloud.ListUsersResponse, error)
 }

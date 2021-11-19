@@ -6,8 +6,8 @@ import (
 	"github.com/zhigang/arctl/util"
 )
 
-// DescribeOptions is returned by newOptions
-type DescribeOptions struct {
+// describeOptions is returned by newOptions
+type describeOptions struct {
 	ID         string
 	Name       string
 	Type       int
@@ -16,9 +16,9 @@ type DescribeOptions struct {
 	printers.IOStreams
 }
 
-// newOptions returns a DescribeOptions with default page size 999.
-func newOptions(streams printers.IOStreams) *DescribeOptions {
-	return &DescribeOptions{
+// newOptions returns a describeOptions with default page size 999.
+func newOptions(streams printers.IOStreams) *describeOptions {
+	return &describeOptions{
 		IOStreams:  streams,
 		Type:       0,
 		PageNumber: 1,
@@ -26,7 +26,7 @@ func newOptions(streams printers.IOStreams) *DescribeOptions {
 	}
 }
 
-// NewCmdDeploy returns new initialized instance of describe sub command
+// NewCmdDescribe returns new initialized instance of describe sub command
 func NewCmdDescribe(streams printers.IOStreams, f util.Factory) *cobra.Command {
 	o := newOptions(streams)
 

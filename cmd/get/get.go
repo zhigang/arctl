@@ -6,8 +6,8 @@ import (
 	"github.com/zhigang/arctl/util"
 )
 
-// GetOptions is returned by newGetOptions
-type GetOptions struct {
+// getOptions is returned by newGetOptions
+type getOptions struct {
 	ID            string
 	LabelSelector string
 	Type          int
@@ -16,9 +16,9 @@ type GetOptions struct {
 	printers.IOStreams
 }
 
-// newGetOptions returns a GetOptions with default page size 999.
-func newGetOptions(streams printers.IOStreams) *GetOptions {
-	return &GetOptions{
+// newGetOptions returns a getOptions with default page size 999.
+func newGetOptions(streams printers.IOStreams) *getOptions {
+	return &getOptions{
 		IOStreams:  streams,
 		Type:       0,
 		PageNumber: 1,

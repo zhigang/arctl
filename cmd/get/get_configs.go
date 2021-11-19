@@ -11,7 +11,7 @@ import (
 )
 
 // newCmdGetAppConfig creates a command object for get application's configs
-func newCmdGetAppConfig(o *GetOptions, f util.Factory) *cobra.Command {
+func newCmdGetAppConfig(o *getOptions, f util.Factory) *cobra.Command {
 
 	var cmd = &cobra.Command{
 		Use:   "configs [APPLICATION_NAME]",

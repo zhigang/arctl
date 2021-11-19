@@ -8,8 +8,8 @@ import (
 	"github.com/zhigang/arctl/util"
 )
 
-// LabelOptions is returned by newLabelOptions
-type LabelOptions struct {
+// labelOptions is returned by newLabelOptions
+type labelOptions struct {
 	ClusterID     string
 	InstanceIDs   []string
 	LabelSelector string
@@ -18,9 +18,9 @@ type LabelOptions struct {
 	printers.IOStreams
 }
 
-// newLabelOptions returns an initialized LabelOptions instance
-func newLabelOptions(streams printers.IOStreams) *LabelOptions {
-	return &LabelOptions{
+// newLabelOptions returns an initialized labelOptions instance
+func newLabelOptions(streams printers.IOStreams) *labelOptions {
+	return &labelOptions{
 		IOStreams: streams,
 	}
 }

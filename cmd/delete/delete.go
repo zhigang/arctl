@@ -6,8 +6,8 @@ import (
 	"github.com/zhigang/arctl/util"
 )
 
-// DeleteOptions is returned by newDeleteOptions
-type DeleteOptions struct {
+// deleteOptions is returned by newDeleteOptions
+type deleteOptions struct {
 	ID            string
 	Force         bool
 	LabelSelector string
@@ -16,9 +16,9 @@ type DeleteOptions struct {
 	printers.IOStreams
 }
 
-// newDeleteOptions returns an initialized DeleteOptions instance
-func newDeleteOptions(streams printers.IOStreams) *DeleteOptions {
-	return &DeleteOptions{
+// newDeleteOptions returns an initialized deleteOptions instance
+func newDeleteOptions(streams printers.IOStreams) *deleteOptions {
+	return &deleteOptions{
 		IOStreams:  streams,
 		PageNumber: 1,
 		PageSize:   999,

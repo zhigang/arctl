@@ -8,9 +8,9 @@ import (
 	"github.com/zhigang/arctl/util"
 )
 
-// CreateAppConfigOptions is returned by newCreateAppConfigOptions
-type CreateAppConfigOptions struct {
-	AppId         int
+// createAppConfigOptions is returned by newCreateAppConfigOptions
+type createAppConfigOptions struct {
+	AppID         int
 	EnvType       int
 	Name          string
 	CodePath      string
@@ -24,9 +24,9 @@ type CreateAppConfigOptions struct {
 	printers.IOStreams
 }
 
-// newCreateAppConfigOptions returns an initialized CreateAppConfigOptions instance
-func newCreateAppConfigOptions(streams printers.IOStreams) *CreateAppConfigOptions {
-	return &CreateAppConfigOptions{
+// newCreateAppConfigOptions returns an initialized createAppConfigOptions instance
+func newCreateAppConfigOptions(streams printers.IOStreams) *createAppConfigOptions {
+	return &createAppConfigOptions{
 		IOStreams: streams,
 		EnvType:   0,
 		FileType:  "deploy",
@@ -77,7 +77,7 @@ func newCmdCreateAppConfig(streams printers.IOStreams, f util.Factory) *cobra.Co
 
 			as := f.AppService()
 
-			resp, err := as.CreateDeployConfig(o.AppId, envType, o.Name, o.CodePath, o.Deployment, o.StatefulSet, o.CronJob, o.ConfigMapList)
+			resp, err := as.CreateDeployConfig(o.AppID, envType, o.Name, o.CodePath, o.Deployment, o.StatefulSet, o.CronJob, o.ConfigMapList)
 			if err != nil {
 				util.CheckErr(o.ErrOut, err)
 			}
@@ -89,7 +89,7 @@ func newCmdCreateAppConfig(streams printers.IOStreams, f util.Factory) *cobra.Co
 			}
 		},
 	}
-	cmd.Flags().IntVar(&o.AppId, "appID", o.AppId, "ID of application. (required)")
+	cmd.Flags().IntVar(&o.AppID, "appID", o.AppID, "ID of application. (required)")
 	cmd.Flags().IntVarP(&o.EnvType, "type", "t", o.EnvType, "Type of environment. Value of 0 [test], 1 [production] (required)")
 	cmd.Flags().StringVar(&o.Name, "name", o.Name, "Name of application's deploy config. (required)")
 

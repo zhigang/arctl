@@ -11,7 +11,7 @@ import (
 )
 
 // newCmdGetClusters creates a command object for get clusters
-func newCmdGetClusters(o *GetOptions, f util.Factory) *cobra.Command {
+func newCmdGetClusters(o *getOptions, f util.Factory) *cobra.Command {
 
 	var cmd = &cobra.Command{
 		Use:   "clusters",

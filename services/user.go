@@ -19,7 +19,7 @@ func newUserService(factory util.Factory) *userServiceImpl {
 
 func (s *userServiceImpl) GetUserList(pageNumber, pageSize int) (*retailcloud.ListUsersResponse, error) {
 	request := retailcloud.CreateListUsersRequest()
-	request.Scheme = util.REQUEST_SCHEME
+	request.Scheme = util.RequestScheme
 	request.PageNumber = requests.NewInteger(pageNumber)
 	request.PageSize = requests.NewInteger(pageSize)
 

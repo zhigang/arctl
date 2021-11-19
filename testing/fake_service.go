@@ -8,17 +8,25 @@ import (
 )
 
 var (
+	// ErrorNotFound is a resource not found error
 	ErrorNotFound = errors.New("resource not found")
 )
 
 const (
-	APP1_ID      int64  = 12345
-	APP1_ENV1_ID int64  = 1234511
-	APP1_ENV2_ID int64  = 1234522
-	APP2_ID      int64  = 54321
-	APP2_ENV1_ID int64  = 1234533
-	CLUSTER1_ID  string = "c-id-778899"
-	CLUSTER2_ID  string = "c-id-990099"
+	// App1ID is a fake application 1
+	App1ID int64 = 12345
+	// App1WithEnv1ID is a fake env 1 of application 1
+	App1WithEnv1ID int64 = 1234511
+	// App1WithEnv2ID is a fake env 2 of application 1
+	App1WithEnv2ID int64 = 1234522
+	// App2ID is a fake application 2
+	App2ID int64 = 54321
+	// App2WithEnv1ID is a fake env 1 of application 2
+	App2WithEnv1ID int64 = 1234533
+	// Cluster1ID is a fake cluster 1
+	Cluster1ID string = "c-id-778899"
+	// Cluster2ID is a fake cluster 2
+	Cluster2ID string = "c-id-990099"
 )
 
 type appServiceImpl struct {
@@ -36,7 +44,7 @@ func (s *appServiceImpl) GetApp(appID int) (*retailcloud.DescribeAppDetailRespon
 	resp := &retailcloud.DescribeAppDetailResponse{}
 	if appID == 12345 {
 		resp.Result = retailcloud.Result{
-			AppId:           APP1_ID,
+			AppId:           App1ID,
 			Title:           "test1",
 			AppStateType:    "stateless",
 			BizName:         "JST",
@@ -52,8 +60,8 @@ func (s *appServiceImpl) GetApp(appID int) (*retailcloud.DescribeAppDetailRespon
 func (s *appServiceImpl) GetAppList(pageNumber, pageSize int) (*retailcloud.ListAppResponse, error) {
 	resp := &retailcloud.ListAppResponse{}
 	resp.Data = []retailcloud.AppDetail{}
-	app1 := makeFakeApp(APP1_ID, "test1", "测试1")
-	app2 := makeFakeApp(APP2_ID, "test2", "测试2")
+	app1 := makeFakeApp(App1ID, "test1", "测试1")
+	app2 := makeFakeApp(App2ID, "test2", "测试2")
 	resp.Data = append(resp.Data, app1, app2)
 	return resp, nil
 }
@@ -65,7 +73,7 @@ func (s *appServiceImpl) GetDeployConfig(appID, id int, name, envType string) (*
 	conf1 := retailcloud.DeployConfigInstance{
 		Id:      1,
 		Name:    "conf-test-1",
-		AppId:   APP1_ID,
+		AppId:   App1ID,
 		EnvType: "test",
 		ContainerYamlConf: retailcloud.ContainerYamlConf{
 			Deployment: "yaml...content",
@@ -74,13 +82,13 @@ func (s *appServiceImpl) GetDeployConfig(appID, id int, name, envType string) (*
 	conf2 := retailcloud.DeployConfigInstance{
 		Id:      2,
 		Name:    "conf-test-2",
-		AppId:   APP1_ID,
+		AppId:   App1ID,
 		EnvType: "online",
 		ContainerYamlConf: retailcloud.ContainerYamlConf{
 			Deployment: "yaml...content",
 		},
 	}
-	if appID == int(APP1_ID) {
+	if appID == int(App1ID) {
 		if envType == "test" {
 			resp.Data = append(resp.Data, conf1)
 		} else if envType == "online" {
@@ -115,10 +123,10 @@ func (s *appServiceImpl) GetAppInstance(appID, envID, pageNumber, pageSize int) 
 		Limits:        "4vcpu 8GB",
 		CreateTime:    "2021-11-18T08:30:20",
 	}
-	if appID == int(APP1_ID) {
-		if envID == int(APP1_ENV1_ID) {
+	if appID == int(App1ID) {
+		if envID == int(App1WithEnv1ID) {
 			resp.Data = append(resp.Data, i1)
-		} else if envID == int(APP1_ENV2_ID) {
+		} else if envID == int(App1WithEnv2ID) {
 			resp.Data = append(resp.Data, i2)
 		} else {
 			resp.Data = append(resp.Data, i1, i2)
@@ -149,7 +157,7 @@ func (s *clusterServiceImpl) GetClusterList(envType string, pageNumber, pageSize
 	resp := &retailcloud.ListClusterResponse{}
 	resp.Data = []retailcloud.ClusterInfo{}
 	test := retailcloud.ClusterInfo{
-		InstanceId:   CLUSTER1_ID,
+		InstanceId:   Cluster1ID,
 		ClusterTitle: "Test集群",
 		BusinessCode: "JST",
 		Status:       "running",
@@ -168,7 +176,7 @@ func (s *clusterServiceImpl) GetClusterList(envType string, pageNumber, pageSize
 	}
 
 	test2 := retailcloud.ClusterInfo{
-		InstanceId:   CLUSTER2_ID,
+		InstanceId:   Cluster2ID,
 		ClusterTitle: "PRO集群",
 		BusinessCode: "JST",
 		Status:       "running",
@@ -212,24 +220,24 @@ func (s *environmentServiceImpl) GetEnvList(appID, pageNumber, pageSize, envType
 	resp := &retailcloud.ListAppEnvironmentResponse{}
 	resp.Data = []retailcloud.AppEnvironmentResponse{}
 	env1 := retailcloud.AppEnvironmentResponse{
-		AppId:   APP1_ID,
-		EnvId:   APP1_ENV1_ID,
+		AppId:   App1ID,
+		EnvId:   App1WithEnv1ID,
 		EnvName: "Test",
 		EnvType: 0,
 	}
 	env2 := retailcloud.AppEnvironmentResponse{
-		AppId:   APP1_ID,
-		EnvId:   APP1_ENV2_ID,
+		AppId:   App1ID,
+		EnvId:   App1WithEnv2ID,
 		EnvName: "Production",
 		EnvType: 1,
 	}
 	env3 := retailcloud.AppEnvironmentResponse{
-		AppId:   APP2_ID,
-		EnvId:   APP2_ENV1_ID,
+		AppId:   App2ID,
+		EnvId:   App2WithEnv1ID,
 		EnvName: "Test",
 		EnvType: 0,
 	}
-	if appID == int(APP1_ID) {
+	if appID == int(App1ID) {
 		if envType == 0 {
 			resp.Data = append(resp.Data, env1)
 		} else if envType == 1 {
@@ -237,7 +245,7 @@ func (s *environmentServiceImpl) GetEnvList(appID, pageNumber, pageSize, envType
 		} else {
 			resp.Data = append(resp.Data, env1, env2)
 		}
-	} else if appID == int(APP2_ID) && envType == 0 {
+	} else if appID == int(App2ID) && envType == 0 {
 		resp.Data = append(resp.Data, env3)
 	}
 	return resp, nil
@@ -264,9 +272,9 @@ func (s *nodeServiceImpl) GetClusterNodes(clusterID string, pageNumber, pageSize
 	n4 := makeFakeNode("ecs-test-id-4", "ecs-test-4", "172.26.124.77")
 	n5 := makeFakeNode("ecs-test-id-5", "ecs-test-5", "172.26.124.78")
 
-	if clusterID == CLUSTER1_ID {
+	if clusterID == Cluster1ID {
 		resp.Data = append(resp.Data, n1, n2)
-	} else if clusterID == CLUSTER2_ID {
+	} else if clusterID == Cluster2ID {
 		resp.Data = append(resp.Data, n3, n4, n5)
 	}
 
@@ -300,9 +308,9 @@ func (s *userServiceImpl) GetUserList(pageNumber, pageSize int) (*retailcloud.Li
 	return resp, nil
 }
 
-func makeFakeApp(appId int64, title, bizTitle string) retailcloud.AppDetail {
+func makeFakeApp(appID int64, title, bizTitle string) retailcloud.AppDetail {
 	return retailcloud.AppDetail{
-		AppId:           appId,
+		AppId:           appID,
 		Title:           title,
 		AppStateType:    "stateless",
 		BizName:         "JST",

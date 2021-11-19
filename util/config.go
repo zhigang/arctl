@@ -23,6 +23,7 @@ type Config struct {
 	}
 }
 
+// LoadConfig loads config file from a path
 func LoadConfig(cfgFile string) (*Config, error) {
 	var err error = nil
 	config := &Config{}

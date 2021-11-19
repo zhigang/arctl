@@ -9,20 +9,20 @@ import (
 )
 
 // CreateEnvOptions is returned by newCreateEnvOptions
-type CreateEnvOptions struct {
+type createEnvOptions struct {
 	AppID     int
 	SchemaID  int
 	Replicas  int
 	EnvType   int
 	EnvName   string
 	Region    string
-	ClusterId string
+	ClusterID string
 	printers.IOStreams
 }
 
-// newCreateEnvOptions returns an initialized CreateEnvOptions instance
-func newCreateEnvOptions(streams printers.IOStreams) *CreateEnvOptions {
-	return &CreateEnvOptions{
+// newCreateEnvOptions returns an initialized createEnvOptions instance
+func newCreateEnvOptions(streams printers.IOStreams) *createEnvOptions {
+	return &createEnvOptions{
 		IOStreams: streams,
 	}
 }
@@ -41,7 +41,7 @@ func newCmdCreateEnv(streams printers.IOStreams, f util.Factory) *cobra.Command 
 
 			es := f.EnvironmentService()
 
-			resp, err := es.CreateEnv(o.AppID, o.SchemaID, o.Replicas, o.EnvType, o.EnvName, o.Region, o.ClusterId)
+			resp, err := es.CreateEnv(o.AppID, o.SchemaID, o.Replicas, o.EnvType, o.EnvName, o.Region, o.ClusterID)
 			if err != nil {
 				util.CheckErr(o.ErrOut, err)
 			}
@@ -59,7 +59,7 @@ func newCmdCreateEnv(streams printers.IOStreams, f util.Factory) *cobra.Command 
 	cmd.Flags().IntVar(&o.SchemaID, "schema", o.SchemaID, "Schema ID is application's deploy config ID.")
 	cmd.Flags().IntVar(&o.Replicas, "replicas", o.Replicas, "Replicas of application in environment.")
 	cmd.Flags().StringVar(&o.Region, "region", o.Region, "Region of environment.")
-	cmd.Flags().StringVar(&o.ClusterId, "cluster", o.ClusterId, "Cluster ID of environment. (required)")
+	cmd.Flags().StringVar(&o.ClusterID, "cluster", o.ClusterID, "Cluster ID of environment. (required)")
 	cmd.MarkFlagRequired("name")
 	cmd.MarkFlagRequired("type")
 	cmd.MarkFlagRequired("appID")

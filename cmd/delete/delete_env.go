@@ -10,7 +10,7 @@ import (
 )
 
 // newCmdDeleteAppEnv is a command to delete application's environment.
-func newCmdDeleteAppEnv(o *DeleteOptions, f util.Factory) *cobra.Command {
+func newCmdDeleteAppEnv(o *deleteOptions, f util.Factory) *cobra.Command {
 
 	var cmd = &cobra.Command{
 		Use:   "env",

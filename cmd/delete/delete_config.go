@@ -10,7 +10,7 @@ import (
 )
 
 // newCmdDeleteAppConfig is a command to delete application's config.
-func newCmdDeleteAppConfig(o *DeleteOptions, f util.Factory) *cobra.Command {
+func newCmdDeleteAppConfig(o *deleteOptions, f util.Factory) *cobra.Command {
 
 	var cmd = &cobra.Command{
 		Use:   "config",

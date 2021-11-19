@@ -9,7 +9,7 @@ import (
 )
 
 // newCmdGetUsers creates a command object for get users.
-func newCmdGetUsers(o *GetOptions, f util.Factory) *cobra.Command {
+func newCmdGetUsers(o *getOptions, f util.Factory) *cobra.Command {
 
 	var cmd = &cobra.Command{
 		Use:   "users",

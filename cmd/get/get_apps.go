@@ -14,7 +14,7 @@ import (
 )
 
 // newCmdGetApps creates a command object for get applications
-func newCmdGetApps(o *GetOptions, f util.Factory) *cobra.Command {
+func newCmdGetApps(o *getOptions, f util.Factory) *cobra.Command {
 
 	var cmd = &cobra.Command{
 		Use:   "apps",
@@ -83,7 +83,7 @@ func newCmdGetApps(o *GetOptions, f util.Factory) *cobra.Command {
 					w := &pool.Worker{
 						Process: func(param ...interface{}) interface{} {
 							app := param[0].(retailcloud.AppDetail)
-							opt := param[1].(*GetOptions)
+							opt := param[1].(*getOptions)
 							fct := param[2].(util.Factory)
 							all := param[3].(bool)
 							es := fct.EnvironmentService()
@@ -106,7 +106,7 @@ func newCmdGetApps(o *GetOptions, f util.Factory) *cobra.Command {
 								runningCnt := 0
 								for _, v := range ed.Data {
 									if strings.ToLower(v.Health) == "running" {
-										runningCnt += 1
+										runningCnt++
 									}
 								}
 								rows := append(bases, strconv.FormatInt(e.EnvId, 10), e.EnvName, e.EnvTypeName, fmt.Sprintf("%d/%d", runningCnt, e.Replicas), strconv.FormatInt(e.AppSchemaId, 10), e.Region)

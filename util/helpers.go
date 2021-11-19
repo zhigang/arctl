@@ -6,8 +6,10 @@ import (
 )
 
 const (
-	REQUEST_SCHEME   = "https"
-	LABEL_PREFIX_JST = "label.jst.com/"
+	// RequestScheme is default request scheme for retail client
+	RequestScheme = "https"
+	// DefaultLabelPrefix is default label prefix 'label.jst.com'
+	DefaultLabelPrefix = "label.jst.com/"
 )
 
 // ParseLabels returns a label maps and remove label arrays
@@ -21,10 +23,10 @@ func ParseLabels(labelSelector string) (map[string]string, []string, error) {
 			if len(parts) != 2 {
 				return nil, nil, fmt.Errorf("invalid label spec: %v", labelSpec)
 			}
-			if strings.HasPrefix(parts[0], LABEL_PREFIX_JST) {
+			if strings.HasPrefix(parts[0], DefaultLabelPrefix) {
 				labels[parts[0]] = parts[1]
 			} else {
-				labels[LABEL_PREFIX_JST+parts[0]] = parts[1]
+				labels[DefaultLabelPrefix+parts[0]] = parts[1]
 			}
 		} else if strings.HasSuffix(labelSpec, "-") {
 			remove = append(remove, labelSpec[:len(labelSpec)-1])
@@ -40,6 +42,7 @@ func ParseLabels(labelSelector string) (map[string]string, []string, error) {
 	return labels, remove, nil
 }
 
+// GetBusinessMessage returns message if business code matched
 func GetBusinessMessage(businessCode string) string {
 	switch businessCode {
 	case "102000":

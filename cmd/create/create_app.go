@@ -9,7 +9,7 @@ import (
 )
 
 // CreateAppOptions is returned by newCreateAppOptions
-type CreateAppOptions struct {
+type createAppOptions struct {
 	Title       string
 	BizCode     string
 	Language    string
@@ -23,9 +23,9 @@ type CreateAppOptions struct {
 	printers.IOStreams
 }
 
-// newCreateAppOptions returns an initialized CreateAppOptions instance
-func newCreateAppOptions(streams printers.IOStreams) *CreateAppOptions {
-	return &CreateAppOptions{
+// newCreateAppOptions returns an initialized createAppOptions instance
+func newCreateAppOptions(streams printers.IOStreams) *createAppOptions {
+	return &createAppOptions{
 		IOStreams:   streams,
 		BizCode:     "JST",
 		Language:    "Java",

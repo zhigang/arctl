@@ -19,7 +19,7 @@ func newAppService(factory util.Factory) *appServiceImpl {
 
 func (s *appServiceImpl) GetAppList(pageNumber, pageSize int) (*retailcloud.ListAppResponse, error) {
 	request := retailcloud.CreateListAppRequest()
-	request.Scheme = util.REQUEST_SCHEME
+	request.Scheme = util.RequestScheme
 
 	request.PageNumber = requests.NewInteger(pageNumber)
 	request.PageSize = requests.NewInteger(pageSize)
@@ -42,7 +42,7 @@ func (s *appServiceImpl) GetAppList(pageNumber, pageSize int) (*retailcloud.List
 // 具体的错误码。枚举值：102000：没有发布准入凭据； 102001：发布准入凭据审核中
 func (s *appServiceImpl) DeployApp(envID, totalPartitions int, name, image string) (*retailcloud.DeployAppResponse, error) {
 	request := retailcloud.CreateDeployAppRequest()
-	request.Scheme = util.REQUEST_SCHEME
+	request.Scheme = util.RequestScheme
 	request.Name = name
 	request.EnvId = requests.NewInteger(envID)
 	request.TotalPartitions = requests.NewInteger(totalPartitions)
@@ -61,7 +61,7 @@ func (s *appServiceImpl) DeployApp(envID, totalPartitions int, name, image strin
 
 func (s *appServiceImpl) GetAppInstance(appID, envID, pageNumber, pageSize int) (*retailcloud.ListAppInstanceResponse, error) {
 	request := retailcloud.CreateListAppInstanceRequest()
-	request.Scheme = util.REQUEST_SCHEME
+	request.Scheme = util.RequestScheme
 
 	request.AppId = requests.NewInteger(appID)
 	request.EnvId = requests.NewInteger(envID)
@@ -81,7 +81,7 @@ func (s *appServiceImpl) GetAppInstance(appID, envID, pageNumber, pageSize int) 
 
 func (s *appServiceImpl) GetApp(appID int) (*retailcloud.DescribeAppDetailResponse, error) {
 	request := retailcloud.CreateDescribeAppDetailRequest()
-	request.Scheme = util.REQUEST_SCHEME
+	request.Scheme = util.RequestScheme
 
 	request.AppId = requests.NewInteger(appID)
 
@@ -98,7 +98,7 @@ func (s *appServiceImpl) GetApp(appID int) (*retailcloud.DescribeAppDetailRespon
 
 func (s *appServiceImpl) DeleteApp(appID int, force bool) (*retailcloud.DeleteAppDetailResponse, error) {
 	request := retailcloud.CreateDeleteAppDetailRequest()
-	request.Scheme = util.REQUEST_SCHEME
+	request.Scheme = util.RequestScheme
 
 	request.AppId = requests.NewInteger(appID)
 	request.Force = requests.NewBoolean(force)
@@ -116,7 +116,7 @@ func (s *appServiceImpl) DeleteApp(appID int, force bool) (*retailcloud.DeleteAp
 
 func (s *appServiceImpl) ScaleApp(envID, replicas int) (*retailcloud.ScaleAppResponse, error) {
 	request := retailcloud.CreateScaleAppRequest()
-	request.Scheme = util.REQUEST_SCHEME
+	request.Scheme = util.RequestScheme
 	request.EnvId = requests.NewInteger(envID)
 	request.Replicas = requests.NewInteger(replicas)
 
@@ -136,7 +136,7 @@ func (s *appServiceImpl) ScaleApp(envID, replicas int) (*retailcloud.ScaleAppRes
 // bizTitle, desc, stateType, ns is optional
 func (s *appServiceImpl) CreateApp(title, bizCode, bizTitle, desc, ownerID, language, os, serviceType, ns string, stateType int) (*retailcloud.CreateAppResponse, error) {
 	request := retailcloud.CreateCreateAppRequest()
-	request.Scheme = util.REQUEST_SCHEME
+	request.Scheme = util.RequestScheme
 
 	request.BizCode = bizCode
 	request.OperatingSystem = os
@@ -178,7 +178,7 @@ func (s *appServiceImpl) CreateApp(title, bizCode, bizTitle, desc, ownerID, lang
 
 func (s *appServiceImpl) DeleteDeployConfig(schemaID int) (*retailcloud.DeleteDeployConfigResponse, error) {
 	request := retailcloud.CreateDeleteDeployConfigRequest()
-	request.Scheme = util.REQUEST_SCHEME
+	request.Scheme = util.RequestScheme
 
 	request.SchemaId = requests.NewInteger(schemaID)
 
@@ -195,7 +195,7 @@ func (s *appServiceImpl) DeleteDeployConfig(schemaID int) (*retailcloud.DeleteDe
 
 func (s *appServiceImpl) CreateDeployConfig(appID int, envType, name, codePath, deployment, statefulSet, cronJob string, configMapList []string) (*retailcloud.CreateDeployConfigResponse, error) {
 	request := retailcloud.CreateCreateDeployConfigRequest()
-	request.Scheme = util.REQUEST_SCHEME
+	request.Scheme = util.RequestScheme
 
 	request.AppId = requests.NewInteger(appID)
 	request.EnvType = envType
@@ -234,7 +234,7 @@ func (s *appServiceImpl) CreateDeployConfig(appID int, envType, name, codePath, 
 
 func (s *appServiceImpl) GetDeployConfig(appID, id int, name, envType string) (*retailcloud.ListDeployConfigResponse, error) {
 	request := retailcloud.CreateListDeployConfigRequest()
-	request.Scheme = util.REQUEST_SCHEME
+	request.Scheme = util.RequestScheme
 
 	request.AppId = requests.NewInteger(appID)
 

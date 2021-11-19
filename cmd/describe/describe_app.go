@@ -12,7 +12,7 @@ import (
 )
 
 // newCmdDescribeApp show details of a specific application.
-func newCmdDescribeApp(o *DescribeOptions, f util.Factory) *cobra.Command {
+func newCmdDescribeApp(o *describeOptions, f util.Factory) *cobra.Command {
 
 	var cmd = &cobra.Command{
 		Use:                   "app [APPLICATION_NAME]",
@@ -94,7 +94,7 @@ func newCmdDescribeApp(o *DescribeOptions, f util.Factory) *cobra.Command {
 				instances := [][]string{}
 				for _, v := range ed.Data {
 					if strings.ToLower(v.Health) == "running" {
-						runningCnt += 1
+						runningCnt++
 					}
 					instances = append(instances, []string{v.AppInstanceId, v.PodIp, v.HostIp, strconv.Itoa(v.RestartCount), v.Health, v.Requests, v.Limits, v.CreateTime})
 				}

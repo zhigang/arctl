@@ -46,6 +46,7 @@ func GetNewTableWriter(output io.Writer) *tablewriter.Table {
 	return t
 }
 
+// Print prints information with default TableWriter.
 func Print(output io.Writer, headers []string, values ...[]string) {
 	t := GetNewTableWriter(output)
 	t.SetHeader(headers)
@@ -54,6 +55,7 @@ func Print(output io.Writer, headers []string, values ...[]string) {
 	fmt.Println()
 }
 
+// PrintTable prints information with a new TableWriter.
 func PrintTable(output io.Writer, headers []string, values ...[]string) {
 	t := tablewriter.NewWriter(output)
 	t.SetHeader(headers)
@@ -66,6 +68,7 @@ func GetNewTabWriter(output io.Writer) *tabwriter.Writer {
 	return tabwriter.NewWriter(output, tabwriterMinWidth, tabwriterWidth, tabwriterPadding, tabwriterPadChar, tabwriterFlags)
 }
 
+// PrintRows prints rows with default tabwriter.
 func PrintRows(out io.Writer, rows []string) {
 	for i := 0; i < len(rows); i++ {
 		PrintValue(out, rows[i])
@@ -73,10 +76,12 @@ func PrintRows(out io.Writer, rows []string) {
 	fmt.Fprintln(out)
 }
 
+// PrintValue prints value with default tabwriter.
 func PrintValue(out io.Writer, value interface{}) {
 	fmt.Fprintf(out, "%v\t", value)
 }
 
+// PrintObj prints name and value with default tabwriter.
 func PrintObj(out io.Writer, name string, value interface{}) {
 	fmt.Fprintf(out, "%s:\t%v\t\n", name, value)
 }

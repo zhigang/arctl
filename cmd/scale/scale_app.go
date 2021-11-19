@@ -11,8 +11,8 @@ import (
 	"github.com/zhigang/arctl/util"
 )
 
-// ScaleOptions is returned by newScaleOptions
-type ScaleOptions struct {
+// scaleOptions is returned by newScaleOptions
+type scaleOptions struct {
 	AppID      string
 	AppName    string
 	EnvID      string
@@ -24,9 +24,9 @@ type ScaleOptions struct {
 	printers.IOStreams
 }
 
-// newScaleOptions returns an initialized ScaleOptions instance
-func newScaleOptions(streams printers.IOStreams) *ScaleOptions {
-	return &ScaleOptions{
+// newScaleOptions returns an initialized scaleOptions instance
+func newScaleOptions(streams printers.IOStreams) *scaleOptions {
+	return &scaleOptions{
 		IOStreams:  streams,
 		Type:       0,
 		PageNumber: 1,

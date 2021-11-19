@@ -12,7 +12,7 @@ Controller for aliyun retail cloud.
 #### Build
 
 ```bash
-go build -o arctl
+make build
 ```
 
 #### Config File

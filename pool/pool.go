@@ -7,22 +7,29 @@ import (
 )
 
 const (
+	// RUNNING is pool running status
 	RUNNING = iota
+	// STOPPING is pool stopping status
 	STOPPING
+	// STOPED is pool stoped status
 	STOPED
 )
 
 var (
-	ErrPoolNotRunning  = errors.New("the pool is not running")
+	// ErrPoolNotRunning is pool not running error
+	ErrPoolNotRunning = errors.New("the pool is not running")
+	// ErrInvalidPoolSize is pool size error
 	ErrInvalidPoolSize = errors.New("invalid pool size")
 )
 
+// Worker is a worker of pool
 type Worker struct {
 	Process func(param ...interface{}) interface{}
 	Result  interface{}
 	Param   []interface{}
 }
 
+// Pool is a mult task pool
 type Pool struct {
 	size           int
 	status         int
@@ -33,6 +40,7 @@ type Pool struct {
 	sync.Mutex
 }
 
+// NewPool returns a pool with size
 func NewPool(size int) (*Pool, error) {
 	if size <= 0 {
 		return nil, ErrInvalidPoolSize
@@ -47,6 +55,7 @@ func NewPool(size int) (*Pool, error) {
 	return p, nil
 }
 
+// Put is set a new worker
 func (p *Pool) Put(worker *Worker) error {
 	if p.getStatus() != RUNNING {
 		return ErrPoolNotRunning
@@ -55,6 +64,7 @@ func (p *Pool) Put(worker *Worker) error {
 	return nil
 }
 
+// Run is run all worker in pool
 func (p *Pool) Run() <-chan *Worker {
 	if p.getStatus() != RUNNING {
 		return nil

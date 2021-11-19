@@ -21,7 +21,7 @@ func newNodeService(factory util.Factory) *nodeServiceImpl {
 
 func (s *nodeServiceImpl) GetClusterNodes(clusterID string, pageNumber, pageSize int) (*retailcloud.ListClusterNodeResponse, error) {
 	request := retailcloud.CreateListClusterNodeRequest()
-	request.Scheme = util.REQUEST_SCHEME
+	request.Scheme = util.RequestScheme
 
 	if clusterID != "" {
 		request.ClusterInstanceId = clusterID
@@ -41,7 +41,7 @@ func (s *nodeServiceImpl) GetClusterNodes(clusterID string, pageNumber, pageSize
 
 func (s *nodeServiceImpl) GetNodeLabels(clusterID, instanceID, labelKey, labelValue string, pageNumber, pageSize int) (*retailcloud.ListNodeLabelBindingsResponse, error) {
 	request := retailcloud.CreateListNodeLabelBindingsRequest()
-	request.Scheme = util.REQUEST_SCHEME
+	request.Scheme = util.RequestScheme
 
 	if instanceID != "" {
 		request.InstanceId = instanceID
@@ -50,8 +50,8 @@ func (s *nodeServiceImpl) GetNodeLabels(clusterID, instanceID, labelKey, labelVa
 	if clusterID != "" {
 		request.ClusterId = clusterID
 	}
-	if labelKey != "" && !strings.HasPrefix(labelKey, util.LABEL_PREFIX_JST) {
-		request.LabelKey = util.LABEL_PREFIX_JST + labelKey
+	if labelKey != "" && !strings.HasPrefix(labelKey, util.DefaultLabelPrefix) {
+		request.LabelKey = util.DefaultLabelPrefix + labelKey
 	}
 	if labelValue != "" {
 		request.LabelValue = labelValue
@@ -75,7 +75,7 @@ func (s *nodeServiceImpl) GetNodeLabels(clusterID, instanceID, labelKey, labelVa
 
 func (s *nodeServiceImpl) BindNodeLabel(clusterID, instanceID, labelKey, labelValue string) (*retailcloud.BindNodeLabelResponse, error) {
 	request := retailcloud.CreateBindNodeLabelRequest()
-	request.Scheme = util.REQUEST_SCHEME
+	request.Scheme = util.RequestScheme
 	request.ClusterId = clusterID
 	request.InstanceId = instanceID
 	request.LabelKey = labelKey
@@ -95,7 +95,7 @@ func (s *nodeServiceImpl) BindNodeLabel(clusterID, instanceID, labelKey, labelVa
 
 func (s *nodeServiceImpl) UnbindNodeLabel(clusterID, instanceID, labelKey, labelValue string) (*retailcloud.UnbindNodeLabelResponse, error) {
 	request := retailcloud.CreateUnbindNodeLabelRequest()
-	request.Scheme = util.REQUEST_SCHEME
+	request.Scheme = util.RequestScheme
 	request.ClusterId = clusterID
 	request.InstanceId = instanceID
 	request.LabelKey = labelKey
@@ -115,7 +115,7 @@ func (s *nodeServiceImpl) UnbindNodeLabel(clusterID, instanceID, labelKey, label
 
 func (s *nodeServiceImpl) DeleteNodeLabel(clusterID, labelKey, labelValue string, force bool) (*retailcloud.DeleteNodeLabelResponse, error) {
 	request := retailcloud.CreateDeleteNodeLabelRequest()
-	request.Scheme = util.REQUEST_SCHEME
+	request.Scheme = util.RequestScheme
 	request.ClusterId = clusterID
 	request.LabelKey = labelKey
 	request.LabelValue = labelValue

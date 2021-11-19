@@ -8,6 +8,7 @@ import (
 )
 
 const (
+	// DefaultErrorExitCode is 1 for exit code
 	DefaultErrorExitCode = 1
 )
 
@@ -25,12 +26,13 @@ func fatal(output io.Writer, msg string, code int) {
 	os.Exit(code)
 }
 
+// ExitWithMsg prints a user friendly error and exits with a non-zero exit code.
 func ExitWithMsg(output io.Writer, format string, a ...interface{}) {
 	msg := fmt.Sprintf(format, a...)
 	fatal(output, msg, DefaultErrorExitCode)
 }
 
-// CheckErr prints a user friendly error to STDERR and exits with a non-zero
+// CheckErr prints a user friendly error and exits with a non-zero
 // exit code. Unrecognized errors will be printed with an "error: " prefix.
 func CheckErr(output io.Writer, err error) {
 	checkErr(output, err, fatalErrHandler)

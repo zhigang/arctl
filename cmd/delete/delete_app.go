@@ -10,7 +10,7 @@ import (
 )
 
 // newCmdDeleteApp is a command to delete application.
-func newCmdDeleteApp(o *DeleteOptions, f util.Factory) *cobra.Command {
+func newCmdDeleteApp(o *deleteOptions, f util.Factory) *cobra.Command {
 
 	var cmd = &cobra.Command{
 		Use:   "app",
