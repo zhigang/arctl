@@ -158,7 +158,7 @@ func NewCmdScale(streams printers.IOStreams, f util.Factory) *cobra.Command {
 	cmd.Flags().StringVar(&o.EnvID, "envid", o.EnvID, "ID of environment.")
 	cmd.Flags().IntVar(&o.Replicas, "replicas", -1, "The new desired number of replicas. Required.")
 	cmd.Flags().IntVarP(&o.Type, "type", "t", o.Type, "Selector (type query) to filter on type.(e.g. -t 0 or 1, Type: 0: test; 1: production)")
-	cmd.MarkFlagRequired("replicas")
-	cmd.MarkFlagRequired("type")
+	util.MarkFlagRequired(cmd, o.ErrOut, "replicas")
+	util.MarkFlagRequired(cmd, o.ErrOut, "type")
 	return cmd
 }

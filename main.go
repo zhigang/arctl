@@ -28,7 +28,7 @@ func main() {
 	f = services.NewFactory()
 
 	cobra.OnInitialize(func() {
-		services.LoadConfig(cfgFile)
+		services.SetConfigFilePath(cfgFile)
 	})
 
 	// Parent command to which all subcommands are added.
@@ -49,9 +49,13 @@ func main() {
 	cmds.AddCommand(deploy.NewCmdDeploy(ioStreams, f))
 	cmds.AddCommand(label.NewCmdLabel(ioStreams, f))
 
-	cmds.Execute()
+	if err := cmds.Execute(); err != nil {
+		util.CheckErr(ioStreams.ErrOut, err)
+	}
 }
 
 func runHelp(cmd *cobra.Command, args []string) {
-	cmd.Help()
+	if err := cmd.Help(); err != nil {
+		util.CheckErr(ioStreams.ErrOut, err)
+	}
 }

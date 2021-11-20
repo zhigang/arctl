@@ -47,8 +47,8 @@ func newCmdDeleteAppEnv(o *deleteOptions, f util.Factory) *cobra.Command {
 		},
 	}
 
-	cmd.PersistentFlags().Int("appID", 0, "ID of application.")
-	cmd.MarkFlagRequired("appID")
+	cmd.Flags().Int("appID", 0, "ID of application.")
+	util.MarkFlagRequired(cmd, o.ErrOut, "appID")
 
 	return cmd
 }

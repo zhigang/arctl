@@ -36,7 +36,10 @@ func NewCmdDelete(streams printers.IOStreams, f util.Factory) *cobra.Command {
 
 	cmd.PersistentFlags().StringVarP(&o.ID, "id", "i", o.ID, "Instance ID of resource. (required)")
 	cmd.PersistentFlags().BoolVarP(&o.Force, "force", "f", o.Force, "Force delete resource.")
-	cmd.MarkPersistentFlagRequired("id")
+
+	if err := cmd.MarkPersistentFlagRequired("id"); err != nil {
+		util.CheckErr(o.ErrOut, err)
+	}
 
 	cmd.AddCommand(newCmdDeleteApp(o, f))
 	cmd.AddCommand(newCmdDeleteAppEnv(o, f))

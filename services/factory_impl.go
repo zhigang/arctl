@@ -22,10 +22,9 @@ func NewFactory() util.Factory {
 	return fct
 }
 
-// LoadConfig loads a config file
-func LoadConfig(cfgFile string) {
+// SetConfigFilePath sets a config file path
+func SetConfigFilePath(cfgFile string) {
 	fct.cfgFile = cfgFile
-	fct.Config()
 }
 
 func (f *factoryImpl) Config() (*util.Config, error) {

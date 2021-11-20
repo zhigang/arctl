@@ -120,7 +120,9 @@ func newCmdGetApps(o *getOptions, f util.Factory) *cobra.Command {
 						},
 						Param: []interface{}{v, o, f, showAll},
 					}
-					p.Put(w)
+					if err := p.Put(w); err != nil {
+						util.CheckErr(o.ErrOut, err)
+					}
 				}
 
 				for d := range p.Run() {

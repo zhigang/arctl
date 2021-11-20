@@ -46,8 +46,8 @@ func newCmdDeleteLabel(o *deleteOptions, f util.Factory) *cobra.Command {
 		},
 	}
 
-	cmd.PersistentFlags().StringVarP(&o.LabelSelector, "label", "l", o.LabelSelector, "Labels for instance, supports '='.(e.g. -l key1=value1,key2=value2)")
-	cmd.MarkFlagRequired("label")
+	cmd.Flags().StringVarP(&o.LabelSelector, "label", "l", o.LabelSelector, "Labels for instance, supports '='.(e.g. -l key1=value1,key2=value2)")
+	util.MarkFlagRequired(cmd, o.ErrOut, "label")
 
 	return cmd
 }

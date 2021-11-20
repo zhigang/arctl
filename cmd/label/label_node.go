@@ -86,9 +86,9 @@ func NewCmdLabel(streams printers.IOStreams, f util.Factory) *cobra.Command {
 	cmd.Flags().BoolVarP(&o.Remove, "remove", "r", false, "Remove labels on a instance.")
 	cmd.Flags().StringVarP(&o.LabelSelector, "label", "l", o.LabelSelector, "Labels for instance, supports '='.(e.g. -l key1=value1,key2=value2)")
 
-	cmd.MarkFlagRequired("instance")
-	cmd.MarkFlagRequired("cluster")
-	cmd.MarkFlagRequired("label")
+	util.MarkFlagRequired(cmd, o.ErrOut, "instance")
+	util.MarkFlagRequired(cmd, o.ErrOut, "cluster")
+	util.MarkFlagRequired(cmd, o.ErrOut, "label")
 
 	return cmd
 }

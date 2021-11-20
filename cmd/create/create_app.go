@@ -72,8 +72,8 @@ func newCmdCreateApp(streams printers.IOStreams, f util.Factory) *cobra.Command 
 	cmd.Flags().StringVar(&o.Description, "desc", o.Description, "Description of application.")
 	cmd.Flags().StringVar(&o.Namespace, "ns", o.Namespace, "Namespace of application.")
 	cmd.Flags().IntVar(&o.StateType, "stateType", o.StateType, "StateType of application. Value Of 1(Deployment), 2(StatefulSet), 5(CronJob)")
-	cmd.MarkFlagRequired("title")
-	cmd.MarkFlagRequired("owner")
-	cmd.MarkFlagRequired("bizTitle")
+	util.MarkFlagRequired(cmd, o.ErrOut, "title")
+	util.MarkFlagRequired(cmd, o.ErrOut, "owner")
+	util.MarkFlagRequired(cmd, o.ErrOut, "bizTitle")
 	return cmd
 }

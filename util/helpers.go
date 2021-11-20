@@ -2,7 +2,10 @@ package util
 
 import (
 	"fmt"
+	"io"
 	"strings"
+
+	"github.com/spf13/cobra"
 )
 
 const (
@@ -51,5 +54,11 @@ func GetBusinessMessage(businessCode string) string {
 		return fmt.Sprintf("[%s]%s", businessCode, "发布准入凭据审核中")
 	default:
 		return businessCode
+	}
+}
+
+func MarkFlagRequired(cmd *cobra.Command, errOut io.Writer, name string) {
+	if err := cmd.MarkFlagRequired(name); err != nil {
+		CheckErr(errOut, err)
 	}
 }

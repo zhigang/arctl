@@ -21,7 +21,9 @@ func TestGetApps(t *testing.T) {
 
 	cmd := newCmdGetApps(o, tf)
 	cmd.SetOutput(buf)
-	cmd.Flags().Set("all", "true")
+	if err := cmd.Flags().Set("all", "true"); err != nil {
+		util.CheckErr(o.ErrOut, err)
+	}
 	cmd.Run(cmd, []string{""})
 
 	if !strings.Contains(buf.String(), "test1") {
@@ -34,7 +36,9 @@ func TestGetClusters(t *testing.T) {
 
 	cmd := newCmdGetClusters(o, tf)
 	cmd.SetOutput(buf)
-	cmd.Flags().Set("type", "-1")
+	if err := cmd.Flags().Set("type", "-1"); err != nil {
+		util.CheckErr(o.ErrOut, err)
+	}
 	cmd.Run(cmd, []string{""})
 
 	if !(strings.Contains(buf.String(), "Test集群") && strings.Contains(buf.String(), "PRO集群")) {
@@ -47,7 +51,9 @@ func TestGetAppConfig(t *testing.T) {
 
 	cmd := newCmdGetAppConfig(o, tf)
 	cmd.SetOutput(buf)
-	cmd.Flags().Set("type", "-1")
+	if err := cmd.Flags().Set("type", "-1"); err != nil {
+		util.CheckErr(o.ErrOut, err)
+	}
 	cmd.Run(cmd, []string{"test1"})
 
 	if !(strings.Contains(buf.String(), "test1") &&
@@ -62,9 +68,13 @@ func TestGetNodes(t *testing.T) {
 
 	cmd := newCmdGetNodes(o, tf)
 	cmd.SetOutput(buf)
-	cmd.Flags().Set("type", "0")
 	cmd.Flags().StringVarP(&o.ID, "id", "i", o.ID, "ID of resource.")
-	cmd.Flags().Set("id", my_testing.Cluster1ID)
+	if err := cmd.Flags().Set("type", "0"); err != nil {
+		util.CheckErr(o.ErrOut, err)
+	}
+	if err := cmd.Flags().Set("id", my_testing.Cluster1ID); err != nil {
+		util.CheckErr(o.ErrOut, err)
+	}
 	cmd.Run(cmd, []string{"test1"})
 
 	if !(strings.Contains(buf.String(), "Test集群") &&
@@ -79,7 +89,9 @@ func TestGetPods(t *testing.T) {
 
 	cmd := newCmdGetPods(o, tf)
 	cmd.SetOutput(buf)
-	cmd.Flags().Set("type", "-1")
+	if err := cmd.Flags().Set("type", "-1"); err != nil {
+		util.CheckErr(o.ErrOut, err)
+	}
 	cmd.Run(cmd, []string{"test1"})
 
 	if !(strings.Contains(buf.String(), "test1") &&

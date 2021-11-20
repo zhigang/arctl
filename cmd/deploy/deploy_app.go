@@ -150,14 +150,14 @@ func NewCmdDeploy(streams printers.IOStreams, f util.Factory) *cobra.Command {
 	}
 
 	cmd.Flags().StringVar(&o.Name, "name", o.Name, "Name of deploy. (required)")
-	cmd.Flags().StringVar(&o.AppID, "appid", o.AppID, "ID of application. useful with envid.")
-	cmd.Flags().StringVar(&o.EnvID, "envid", o.EnvID, "ID of environment.")
+	cmd.Flags().StringVar(&o.AppID, "appID", o.AppID, "ID of application. useful with envid.")
+	cmd.Flags().StringVar(&o.EnvID, "envID", o.EnvID, "ID of environment.")
 	cmd.Flags().StringVar(&o.Image, "image", o.Image, "The new desired number of replicas. (required)")
 	cmd.Flags().IntVarP(&o.Type, "type", "t", o.Type, "Selector (type query) to filter on type.(e.g. -t 0 or 1, Type: 0: test; 1: production) (required)")
 
-	cmd.MarkFlagRequired("name")
-	cmd.MarkFlagRequired("image")
-	cmd.MarkFlagRequired("type")
+	util.MarkFlagRequired(cmd, o.ErrOut, "name")
+	util.MarkFlagRequired(cmd, o.ErrOut, "image")
+	util.MarkFlagRequired(cmd, o.ErrOut, "type")
 
 	return cmd
 }

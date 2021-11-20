@@ -104,9 +104,9 @@ func newCmdCreateAppConfig(streams printers.IOStreams, f util.Factory) *cobra.Co
 	cmd.Flags().StringSliceVar(&o.ConfigMapList, "configMap", o.ConfigMapList, "Config map base64 string list of application's deploy config.")
 	cmd.Flags().StringVar(&o.ConfigType, "configType", o.ConfigType, "Value of 'path', 'content'. Useful with flag 'configMap'")
 
-	cmd.MarkFlagRequired("title")
-	cmd.MarkFlagRequired("type")
-	cmd.MarkFlagRequired("name")
+	util.MarkFlagRequired(cmd, o.ErrOut, "appID")
+	util.MarkFlagRequired(cmd, o.ErrOut, "type")
+	util.MarkFlagRequired(cmd, o.ErrOut, "name")
 
 	return cmd
 }
